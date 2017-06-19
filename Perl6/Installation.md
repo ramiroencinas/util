@@ -1,7 +1,7 @@
 # Rakudo Perl 6 Install notes
 
 ## pkg
-<a href="https://github.com/nxadm/rakudo-pkg" target="_blank">https://github.com/nxadm/rakudo-pkg</a>
+[https://github.com/nxadm/rakudo-pkg](https://github.com/nxadm/rakudo-pkg){:target="_blank"}
 
 The faster option for Linux.
 
