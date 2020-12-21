@@ -1,0 +1,28 @@
+use POSIX qw(strftime);
+
+my $date, $remote_ip, $remote_port, $user, $group, $cmdpath;
+
+while (1) {
+
+  foreach (`sudo ss -tupn`) {
+
+    $date = strftime "%d-%m-%Y %H:%M:%S", localtime;
+
+    if ($_ =~ /(\d+\.\d+\.\d+\.\d+):(\d+)\s+users.*?pid=(\d+)/) {
+
+      $remote_ip = $1;
+      $remote_port = $2;
+      $user = `stat --printf="%U" /proc/$3/exe`;
+      $group = `stat --printf="%G" /proc/$3/exe`;
+      $cmdpath = `stat --printf="%N" /proc/$3/exe`;
+      $cmdpath =~ s/^.*?-> '//;
+      $cmdpath =~ s/'//;
+
+      print "$date $user $group $cmdpath $remote_ip $remote_port\n";
+    }
+
+  }
+
+  sleep 1;
+
+}
